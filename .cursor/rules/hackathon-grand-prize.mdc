@@ -1,0 +1,8 @@
+---
+description: Route hackathon research, strategy, architecture, building, judging, demo, pitch, README, red-team, and submission work to the canonical hackathon-grand-prize Agent Skill.
+alwaysApply: false
+---
+
+For hackathon strategy or execution requests, read and follow `hackathon-grand-prize/SKILL.md` from the repository root. Resolve bundled resources relative to `hackathon-grand-prize/` and keep that package as the only source of truth.
+
+Cursor also discovers the repository's `.agents/skills/hackathon-grand-prize/` adapter. Do not install another copy under `.cursor/skills/` while working in this source repository.
