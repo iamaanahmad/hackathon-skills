@@ -1,32 +1,124 @@
 #!/usr/bin/env python3
-"""Weighted project scoring helper for hackathon-grand-prize skill."""
+"""Score the canonical Phase 12 hackathon final scorecard."""
 
 from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import dataclass
-
-
-@dataclass(frozen=True)
-class Criterion:
-    name: str
-    weight: float
+import math
+import sys
+from typing import Any, Optional
 
 
 CRITERIA = (
-    Criterion("problem", 1.0),
-    Criterion("innovation", 1.1),
-    Criterion("technical_execution", 1.0),
-    Criterion("sponsor_integration", 1.0),
-    Criterion("ux_design", 0.9),
-    Criterion("demo", 1.1),
-    Criterion("real_world_impact", 1.0),
-    Criterion("completeness", 0.9),
-    Criterion("reliability", 0.9),
-    Criterion("pitch", 0.9),
-    Criterion("memorability", 1.2),
+    "problem",
+    "innovation",
+    "technical_execution",
+    "sponsor_integration",
+    "ux_design",
+    "demo",
+    "real_world_impact",
+    "completeness",
+    "reliability",
+    "pitch",
+    "memorability",
 )
+DEFAULT_WEIGHTS = {criterion: 1.0 for criterion in CRITERIA}
+
+
+class InputError(ValueError):
+    """Raised for invalid user input."""
+
+
+class CliParser(argparse.ArgumentParser):
+    """Argument parser with concise, stable usage errors."""
+
+    def error(self, message: str) -> None:
+        self.exit(2, f"error: {message}\n")
+
+
+def _reject_constant(value: str) -> None:
+    raise ValueError(f"non-finite number {value!r} is not valid JSON input")
+
+
+def _pairs_to_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate key {key!r}")
+        result[key] = value
+    return result
+
+
+def parse_json_object(raw: str, label: str) -> dict[str, Any]:
+    try:
+        value = json.loads(
+            raw,
+            parse_constant=_reject_constant,
+            object_pairs_hook=_pairs_to_object,
+        )
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise InputError(f"{label} is not valid JSON: {exc}") from None
+    if not isinstance(value, dict):
+        raise InputError(f"{label} must be a JSON object")
+    return value
+
+
+def require_exact_keys(value: dict[str, Any], label: str) -> None:
+    missing = [key for key in CRITERIA if key not in value]
+    unknown = sorted(key for key in value if key not in CRITERIA)
+    problems = []
+    if missing:
+        problems.append("missing keys: " + ", ".join(missing))
+    if unknown:
+        problems.append("unknown keys: " + ", ".join(unknown))
+    if problems:
+        raise InputError(f"{label} has " + "; ".join(problems))
+
+
+def finite_number(value: Any, label: str) -> float:
+    if type(value) not in (int, float):
+        raise InputError(f"{label} must be a finite real number")
+    try:
+        number = float(value)
+    except (OverflowError, ValueError):
+        raise InputError(f"{label} must be a finite real number") from None
+    if not math.isfinite(number):
+        raise InputError(f"{label} must be a finite real number")
+    return number
+
+
+def parse_scores(raw: str) -> dict[str, float]:
+    payload = parse_json_object(raw, "--scores-json")
+    require_exact_keys(payload, "--scores-json")
+
+    scores: dict[str, float] = {}
+    for criterion in CRITERIA:
+        score = finite_number(payload[criterion], f"score {criterion!r}")
+        if not 0.0 <= score <= 10.0:
+            raise InputError(f"score {criterion!r} must be between 0 and 10")
+        scores[criterion] = score
+    return scores
+
+
+def parse_weights(raw: Optional[str]) -> dict[str, float]:
+    if raw is None:
+        return dict(DEFAULT_WEIGHTS)
+
+    payload = parse_json_object(raw, "--weights-json")
+    require_exact_keys(payload, "--weights-json")
+
+    weights: dict[str, float] = {}
+    for criterion in CRITERIA:
+        weight = finite_number(payload[criterion], f"weight {criterion!r}")
+        if weight < 0.0:
+            raise InputError(f"weight {criterion!r} must be nonnegative")
+        weights[criterion] = weight
+
+    total = sum(weights.values())
+    if not math.isfinite(total) or total <= 0.0:
+        raise InputError("weights must have a finite positive total")
+    return weights
 
 
 def classify(score: float) -> str:
@@ -43,51 +135,55 @@ def classify(score: float) -> str:
     return "grand-prize caliber"
 
 
-def parse_scores(raw: str) -> dict[str, float]:
-    data = json.loads(raw)
-    missing = [c.name for c in CRITERIA if c.name not in data]
-    if missing:
-        raise ValueError(f"Missing required criteria: {', '.join(missing)}")
-
-    scores: dict[str, float] = {}
-    for c in CRITERIA:
-        value = float(data[c.name])
-        if value < 0 or value > 10:
-            raise ValueError(f"{c.name} must be between 0 and 10")
-        scores[c.name] = value
-    return scores
+def compute(scores: dict[str, float], weights: dict[str, float]) -> float:
+    total_weight = sum(weights.values())
+    weighted_score = sum(
+        scores[criterion] * (weights[criterion] / total_weight)
+        for criterion in CRITERIA
+    )
+    return round(weighted_score * 10.0, 1)
 
 
-def compute(scores: dict[str, float]) -> tuple[float, dict[str, float]]:
-    total_weight = sum(c.weight for c in CRITERIA)
-    weighted_10 = sum(scores[c.name] * c.weight for c in CRITERIA) / total_weight
-    overall_100 = round(weighted_10 * 10, 1)
-    normalized = {c.name: round(scores[c.name], 1) for c in CRITERIA}
-    return overall_100, normalized
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Score a hackathon project from JSON input.")
+def build_parser() -> argparse.ArgumentParser:
+    parser = CliParser(
+        description=(
+            "Score every criterion in the canonical Phase 12 final scorecard. "
+            "All criteria use equal weights unless --weights-json is supplied."
+        )
+    )
     parser.add_argument(
         "--scores-json",
         required=True,
+        help="JSON object containing every Phase 12 criterion with a score from 0 to 10",
+    )
+    parser.add_argument(
+        "--weights-json",
         help=(
-            "JSON object with 0-10 values for: "
-            + ", ".join(c.name for c in CRITERIA)
+            "optional JSON object with every criterion mapped to a finite, "
+            "nonnegative custom weight"
         ),
     )
-    args = parser.parse_args()
+    return parser
 
-    scores = parse_scores(args.scores_json)
-    overall, normalized = compute(scores)
 
-    output = {
-        "scores": normalized,
-        "overall": overall,
-        "classification": classify(overall),
-    }
-    print(json.dumps(output, indent=2))
-    return 0
+def main(argv: Optional[list[str]] = None) -> int:
+    args = build_parser().parse_args(argv)
+    try:
+        scores = parse_scores(args.scores_json)
+        weights = parse_weights(args.weights_json)
+        overall = compute(scores, weights)
+        output = {
+            "scorecard": "Phase 12 final scorecard",
+            "scores": scores,
+            "weights": weights,
+            "overall": overall,
+            "classification": classify(overall),
+        }
+        print(json.dumps(output, indent=2, allow_nan=False))
+        return 0
+    except InputError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

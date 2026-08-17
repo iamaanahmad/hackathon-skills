@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "skills": [
+    {
+      "name": "hackathon-grand-prize",
+      "path": "hackathon-grand-prize",
+      "description": "Research, select, build, review, demo, pitch, and submit differentiated, judge-optimized hackathon projects."
+    }
+  ]
+}

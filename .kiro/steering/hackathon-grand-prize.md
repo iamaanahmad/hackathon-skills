@@ -1,6 +1,11 @@
-# Kiro Steering Adapter: hackathon-grand-prize
+---
+inclusion: auto
+name: hackathon-grand-prize
+description: Apply the canonical hackathon strategy and execution skill when selecting, building, reviewing, demoing, pitching, or submitting hackathon projects.
+---
 
-For hackathon strategy and execution requests, follow the canonical Agent Skill at:
-`hackathon-grand-prize/SKILL.md`
+# Hackathon Grand Prize adapter
 
-Keep this adapter lightweight; the canonical SKILL.md remains the source of truth.
+For hackathon strategy and execution requests, follow the canonical Agent Skill below. Keep this adapter lightweight; the included file remains the source of truth.
+
+#[[file:hackathon-grand-prize/SKILL.md]]

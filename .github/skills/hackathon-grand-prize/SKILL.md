@@ -1,11 +1,10 @@
 ---
 name: hackathon-grand-prize
-description: Adapter for GitHub Copilot/VS Code skill discovery. Canonical source is hackathon-grand-prize/SKILL.md.
+description: Strategically analyze, select, design, build, review, demo, pitch, and submit differentiated hackathon projects. Use for hackathon research, idea scoring or pivots, sponsor alignment, architecture and MVP planning, agent quality, judge optimization, red teaming, demo reliability, pitch creation, README preparation, or final submission readiness.
 ---
 
-# Adapter
+# Repository discovery adapter
 
-Use the canonical skill file:
-`hackathon-grand-prize/SKILL.md` (repository-root relative)
+Read and follow the canonical skill at `hackathon-grand-prize/SKILL.md` from the repository root. Resolve all `references/`, `assets/`, and `scripts/` paths relative to that canonical directory.
 
-Do not duplicate or diverge from the canonical instructions.
+This adapter is only for discovery while working in this repository. For installation or redistribution, copy the complete `hackathon-grand-prize/` directory into one GitHub Copilot-supported skill location; do not copy this adapter alone.

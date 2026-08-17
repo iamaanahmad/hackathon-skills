@@ -1,0 +1,48 @@
+{
+  "name": "hackathon-skills",
+  "version": "0.1.0",
+  "description": "Install portable hackathon Agent Skills for Claude, Codex, Antigravity, Cursor, Kiro, GitHub Copilot, and compatible agents.",
+  "type": "module",
+  "bin": {
+    "hackathon-skills": "bin/hackathon-skills.mjs"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "skills.json",
+    "hackathon-grand-prize/",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "node bin/hackathon-skills.mjs list --json",
+    "prepack": "npm run check"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "keywords": [
+    "agent-skills",
+    "ai-agents",
+    "hackathon",
+    "claude-code",
+    "codex",
+    "cursor",
+    "kiro",
+    "github-copilot",
+    "antigravity",
+    "npx"
+  ],
+  "author": "iamaanahmad",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamaanahmad/hackathon-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iamaanahmad/hackathon-skills/issues"
+  },
+  "homepage": "https://github.com/iamaanahmad/hackathon-skills#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
