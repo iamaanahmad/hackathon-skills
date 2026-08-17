@@ -1,0 +1,10 @@
+---
+description: Route hackathon strategy requests to the canonical hackathon-grand-prize skill.
+alwaysApply: false
+---
+
+When user requests hackathon project strategy/optimization/demo/pitch/submission guidance,
+apply the canonical skill instructions in:
+`hackathon-grand-prize/SKILL.md`
+
+Do not duplicate the full policy in this adapter.
