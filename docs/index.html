@@ -60,11 +60,11 @@
         
         :root {
             /* Neo-brutalism color palette */
-            --primary-color: #6366f1;
-            --secondary-color: #f59e0b;
-            --accent-color: #10b981;
-            --dark-bg: #000000;
-            --light-bg: #f4f7fb;
+            --primary-color: #4f46e5;
+            --secondary-color: #facc15;
+            --accent-color: #14b8a6;
+            --dark-bg: #020617;
+            --light-bg: #f8fafc;
             --text-dark: #0f172a;
             --text-light: #475569;
             --border-color: #dbe4f0;
@@ -106,18 +106,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
         
         .logo {
             font-size: 1.25rem;
             font-weight: 900;
             letter-spacing: -0.02em;
-            color: white;
+            color: var(--secondary-color);
             text-transform: uppercase;
             border: 3px solid var(--primary-color);
             padding: 0.5rem 1rem;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            white-space: nowrap;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.45);
         }
         
         .nav-links {
@@ -165,6 +166,7 @@
             background: var(--primary-color);
             border: 3px solid white;
             border-radius: 4px;
+            appearance: none;
         }
 
         .menu-toggle span {
@@ -454,14 +456,26 @@
         /* Installation Steps */
         .install-steps {
             background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
             border-radius: 8px;
             border: 4px solid var(--primary-color);
             box-shadow: 8px 8px 0 rgba(99, 102, 241, 0.2);
-            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
         }
         
         .step {
             margin-bottom: 2rem;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .ide-card .code-block {
+            margin-top: 1rem;
+            margin-bottom: 0;
+            padding: 1rem;
+            border-width: 3px;
+            box-shadow: 4px 4px 0 rgba(15, 23, 42, 0.2);
         }
         
         .step-number {
@@ -524,6 +538,11 @@
         
         /* Responsive */
         @media (max-width: 850px) {
+            nav {
+                padding: 0 1rem;
+                justify-content: flex-start;
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
@@ -537,12 +556,18 @@
             }
             
             .logo {
-                font-size: 1rem;
-                padding: 0.4rem 0.8rem;
+                font-size: 0.95rem;
+                padding: 0.35rem 0.7rem;
+                max-width: calc(100% - 4.5rem);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                order: 1;
             }
 
             .menu-toggle {
                 display: flex;
+                margin-left: auto;
+                order: 2;
             }
 
             .nav-links {
@@ -557,6 +582,7 @@
                 display: none;
                 border-bottom: 4px solid var(--primary-color);
                 box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+                order: 3;
             }
 
             .nav-links.active {
@@ -565,6 +591,10 @@
             
             .container {
                 padding: 2rem 1rem;
+            }
+
+            .install-steps {
+                padding: 1.25rem;
             }
 
             .copy-button {
@@ -616,13 +646,13 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
             <div class="logo">Hackathon Skills</div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#installation">Installation</a></li>
                 <li><a href="#ides">IDEs</a></li>
@@ -751,9 +781,8 @@ npx hackathon-skills add hackathon-grand-prize --agent kiro --force
 
 # Custom target directory
 npx hackathon-skills add hackathon-grand-prize --target ./my-skills
-npx hackathon-skills agents</code></pre>
 # List supported agents
-npx hackathon-skills agents</code>
+npx hackathon-skills agents</code></pre>
                     </div>
                 </div>
             </div>
@@ -768,12 +797,15 @@ npx hackathon-skills agents</code>
                     <h4>Claude Code</h4>
                     <p>Anthropic's AI coding assistant</p>
                     <div class="ide-path">.claude/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
                         <button class="copy-button" onclick="copyCode(this)">
                             <span class="copy-icon">📋</span>
                             <span class="copy-text">Copy</span>
                         </button>
+                        </div>
                         <pre><code>npx hackathon-skills add hackathon-grand-prize --agent claude</code></pre>
-                        <code>npx hackathon-skills add hackathon-grand-prize --agent claude</code>
                     </div>
                 </div>
                 
@@ -781,12 +813,15 @@ npx hackathon-skills agents</code>
                     <h4>Cursor</h4>
                     <p>AI-powered code editor</p>
                     <div class="ide-path">.cursor/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
                         <button class="copy-button" onclick="copyCode(this)">
                             <span class="copy-icon">📋</span>
                             <span class="copy-text">Copy</span>
                         </button>
+                        </div>
                         <pre><code>npx hackathon-skills add hackathon-grand-prize --agent cursor</code></pre>
-                        <code>npx hackathon-skills add hackathon-grand-prize --agent cursor</code>
                     </div>
                 </div>
                 
@@ -794,12 +829,15 @@ npx hackathon-skills agents</code>
                     <h4>GitHub Copilot</h4>
                     <p>VS Code / GitHub's AI pair programmer</p>
                     <div class="ide-path">.github/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
                         <button class="copy-button" onclick="copyCode(this)">
                             <span class="copy-icon">📋</span>
                             <span class="copy-text">Copy</span>
                         </button>
+                        </div>
                         <pre><code>npx hackathon-skills add hackathon-grand-prize --agent copilot</code></pre>
-                        <code>npx hackathon-skills add hackathon-grand-prize --agent copilot</code>
                     </div>
                 </div>
                 
@@ -807,12 +845,15 @@ npx hackathon-skills agents</code>
                     <h4>Kiro</h4>
                     <p>Next-gen AI coding assistant</p>
                     <div class="ide-path">.kiro/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
                         <button class="copy-button" onclick="copyCode(this)">
                             <span class="copy-icon">📋</span>
                             <span class="copy-text">Copy</span>
                         </button>
+                        </div>
                         <pre><code>npx hackathon-skills add hackathon-grand-prize --agent kiro</code></pre>
-                        <code>npx hackathon-skills add hackathon-grand-prize --agent kiro</code>
                     </div>
                 </div>
                 
@@ -820,12 +861,15 @@ npx hackathon-skills agents</code>
                     <h4>OpenAI Codex</h4>
                     <p>OpenAI's code generation model</p>
                     <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
                         <button class="copy-button" onclick="copyCode(this)">
                             <span class="copy-icon">📋</span>
                             <span class="copy-text">Copy</span>
                         </button>
+                        </div>
                         <pre><code>npx hackathon-skills add hackathon-grand-prize --agent codex</code></pre>
-                        <code>npx hackathon-skills add hackathon-grand-prize --agent codex</code>
                     </div>
                 </div>
                 
@@ -833,12 +877,15 @@ npx hackathon-skills agents</code>
                     <h4>Google Antigravity CLI</h4>
                     <p>Google's AI development tool</p>
                     <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
                         <button class="copy-button" onclick="copyCode(this)">
                             <span class="copy-icon">📋</span>
                             <span class="copy-text">Copy</span>
                         </button>
+                        </div>
                         <pre><code>npx hackathon-skills add hackathon-grand-prize --agent antigravity</code></pre>
-                        <code>npx hackathon-skills add hackathon-grand-prize --agent antigravity</code>
                     </div>
                 </div>
             </div>
@@ -963,13 +1010,13 @@ npx hackathon-skills agents</code>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">Python</span>
-                </div>
                     <button class="copy-button" onclick="copyCode(this)">
                         <span class="copy-icon">📋</span>
                         <span class="copy-text">Copy</span>
                     </button>
-                <code># Validate skill structure
+                </div>
                 <pre><code># Validate skill structure
+python hackathon-grand-prize/scripts/validate-skill.py
 
 # Score project readiness
 python hackathon-grand-prize/scripts/score-project.py --scores-json '&lt;scores&gt;'
@@ -977,8 +1024,6 @@ python hackathon-grand-prize/scripts/score-project.py --scores-json '&lt;scores&
 # Check project health
 python hackathon-grand-prize/scripts/project-health-check.py --checks-json '&lt;checks&gt;'
 python hackathon-grand-prize/scripts/validate-submission.py --file README.md --check-local-links</code></pre>
-# Validate submission
-python hackathon-grand-prize/scripts/validate-submission.py --file README.md --check-local-links</code>
             </div>
         </section>
     </div>
@@ -1008,11 +1053,12 @@ python hackathon-grand-prize/scripts/validate-submission.py --file README.md --c
     <script>
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.querySelector('.nav-links');
+        const navLinks = document.getElementById('navLinks');
         
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', navLinks.classList.contains('active') ? 'true' : 'false');
         });
 
         // Close menu when clicking a link
@@ -1020,16 +1066,18 @@ python hackathon-grand-prize/scripts/validate-submission.py --file README.md --c
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
             });
         });
 
         // Copy Code Function
         function copyCode(button) {
             const codeBlock = button.closest('.code-block');
-            const code = codeBlock.querySelector('code');
-            const textToCopy = code.textContent;
-            
-            navigator.clipboard.writeText(textToCopy).then(() => {
+            const code = codeBlock?.querySelector('pre code, code');
+            if (!code) return;
+            const textToCopy = code.textContent.trim();
+
+            const updateCopyState = () => {
                 const copyText = button.querySelector('.copy-text');
                 const originalText = copyText.textContent;
                 const copyIcon = button.querySelector('.copy-icon');
@@ -1043,7 +1091,23 @@ python hackathon-grand-prize/scripts/validate-submission.py --file README.md --c
                     copyText.textContent = originalText;
                     copyIcon.textContent = '📋';
                 }, 2000);
-            });
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(updateCopyState);
+                return;
+            }
+
+            const fallback = document.createElement('textarea');
+            fallback.value = textToCopy;
+            fallback.setAttribute('readonly', '');
+            fallback.style.position = 'absolute';
+            fallback.style.left = '-9999px';
+            document.body.appendChild(fallback);
+            fallback.select();
+            document.execCommand('copy');
+            document.body.removeChild(fallback);
+            updateCopyState();
         }
 
         // Scroll Reveal Animation
