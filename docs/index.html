@@ -59,10 +59,11 @@
         }
         
         :root {
-            --primary-color: #4f46e5;
-            --secondary-color: #0ea5e9;
-            --accent-color: #14b8a6;
-            --dark-bg: #0b1220;
+            /* Neo-brutalism color palette */
+            --primary-color: #6366f1;
+            --secondary-color: #f59e0b;
+            --accent-color: #10b981;
+            --dark-bg: #000000;
             --light-bg: #f4f7fb;
             --text-dark: #0f172a;
             --text-light: #475569;
@@ -87,14 +88,15 @@
         
         /* Header & Navigation */
         header {
-            background: rgba(11, 18, 32, 0.88);
+            background: #000000;
             backdrop-filter: blur(10px);
             color: white;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.35);
+            border-bottom: 4px solid var(--primary-color);
+            box-shadow: 8px 8px 0 rgba(99, 102, 241, 0.3);
         }
         
         nav {
@@ -107,11 +109,13 @@
         }
         
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.25rem;
+            font-weight: 900;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #c7d2fe, #67e8f9);
-            -webkit-background-clip: text;
+            color: white;
+            text-transform: uppercase;
+            border: 3px solid var(--primary-color);
+            padding: 0.5rem 1rem;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
@@ -127,6 +131,7 @@
             text-decoration: none;
             transition: color 0.2s;
             position: relative;
+            font-weight: 600;
         }
 
         .nav-links a::after {
@@ -135,10 +140,10 @@
             left: 0;
             bottom: -0.25rem;
             width: 100%;
-            height: 2px;
+            height: 3px;
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.2s;
+            transition: transform 0.3s;
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
         }
         
@@ -148,6 +153,37 @@
 
         .nav-links a:hover::after {
             transform: scaleX(1);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 0.4rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: var(--primary-color);
+            border: 3px solid white;
+            border-radius: 4px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
         
         /* Hero Section */
@@ -187,29 +223,34 @@
         
         .btn {
             padding: 1rem 2rem;
-            border-radius: 999px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: transform 0.2s, box-shadow 0.2s;
             display: inline-block;
-            border: 1px solid transparent;
+            border: 3px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
         }
         
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+            border-color: var(--dark-bg);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
         }
         
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            color: white;
-            border-color: rgba(191, 219, 254, 0.45);
+            background: white;
+            color: var(--dark-bg);
+            border-color: var(--dark-bg);
+            box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.3);
         }
         
         /* Container */
@@ -247,15 +288,16 @@
         .feature-card {
             background: rgba(255, 255, 255, 0.88);
             padding: 2rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+            border-radius: 8px;
+            border: 4px solid var(--text-dark);
+            box-shadow: 6px 6px 0 rgba(15, 23, 42, 0.2);
             transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
         }
         
         .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
+            transform: translate(-3px, -3px);
+            box-shadow: 10px 10px 0 rgba(15, 23, 42, 0.3);
         }
         
         .feature-icon {
@@ -287,9 +329,9 @@
         .ide-card {
             background: rgba(255, 255, 255, 0.92);
             padding: 1.5rem;
-            border-radius: 0.75rem;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
+            border-radius: 8px;
+            border: 3px solid var(--text-dark);
+            box-shadow: 5px 5px 0 rgba(15, 23, 42, 0.2);
         }
         
         .ide-card h4 {
@@ -310,14 +352,62 @@
         
         /* Code Block */
         .code-block {
+            position: relative;
             background: var(--code-bg);
             color: #e2e8f0;
             padding: 1.5rem;
-            border-radius: 0.75rem;
+            border-radius: 6px;
             overflow-x: auto;
             margin: 1.5rem 0;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            box-shadow: 0 12px 26px rgba(2, 6, 23, 0.25);
+            border: 4px solid var(--primary-color);
+            box-shadow: 6px 6px 0 rgba(99, 102, 241, 0.3);
+        }
+
+        /* Copy Button */
+        .copy-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            border: 3px solid var(--dark-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .copy-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .copy-button:active {
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .copy-button.copied {
+            background: var(--accent-color);
+        }
+
+        .copy-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding-right: 100px;
         }
         
         .code-block code {
@@ -351,9 +441,10 @@
         .skill-item {
             background: rgba(255, 255, 255, 0.9);
             padding: 1rem;
-            border-radius: 0.5rem;
-            border-left: 3px solid var(--secondary-color);
-            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
+            border-radius: 4px;
+            border: 3px solid var(--secondary-color);
+            border-left: 6px solid var(--secondary-color);
+            box-shadow: 4px 4px 0 rgba(15, 23, 42, 0.15);
         }
         
         .skill-item strong {
@@ -363,9 +454,9 @@
         /* Installation Steps */
         .install-steps {
             background: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(148, 163, 184, 0.25);
+            border-radius: 8px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 8px 8px 0 rgba(99, 102, 241, 0.2);
             box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
         }
         
@@ -390,17 +481,19 @@
         .usage-examples {
             background: linear-gradient(135deg, rgba(224, 231, 255, 0.5) 0%, rgba(217, 249, 250, 0.45) 100%);
             padding: 2rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 8px;
+            border: 4px solid var(--accent-color);
+            box-shadow: 8px 8px 0 rgba(16, 185, 129, 0.2);
         }
         
         .example-item {
             background: rgba(255, 255, 255, 0.94);
             padding: 1.5rem;
             margin-bottom: 1rem;
-            border-radius: 0.5rem;
-            border-left: 4px solid var(--accent-color);
-            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+            border-radius: 4px;
+            border: 3px solid var(--accent-color);
+            border-left: 6px solid var(--accent-color);
+            box-shadow: 4px 4px 0 rgba(15, 23, 42, 0.1);
         }
         
         /* Footer */
@@ -430,7 +523,7 @@
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .hero h1 {
                 font-size: 2rem;
             }
@@ -443,13 +536,42 @@
                 font-size: 2rem;
             }
             
+            .logo {
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark-bg);
+                flex-direction: column;
+                padding: 1rem 2rem;
                 gap: 1rem;
-                font-size: 0.9rem;
+                display: none;
+                border-bottom: 4px solid var(--primary-color);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            }
+
+            .nav-links.active {
+                display: flex;
             }
             
             .container {
                 padding: 2rem 1rem;
+            }
+
+            .copy-button {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.75rem;
+                top: 0.75rem;
+                right: 0.75rem;
             }
         }
         
@@ -466,7 +588,8 @@
             background: rgba(79, 70, 229, 0.28);
             border: 1px solid rgba(148, 163, 184, 0.4);
             color: white;
-            padding: 0.35rem 0.85rem;
+            border-radius: 4px;
+            border: 2px solid white;
             border-radius: 1rem;
             font-size: 0.875rem;
             font-weight: 500;
@@ -493,6 +616,11 @@
     <!-- Header -->
     <header>
         <nav>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="logo">Hackathon Skills</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
@@ -577,8 +705,12 @@
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Terminal</span>
+                            <button class="copy-button" onclick="copyCode(this)">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
                         </div>
-                        <code>npx hackathon-skills add hackathon-grand-prize --agent claude</code>
+                        <pre><code>npx hackathon-skills add hackathon-grand-prize --agent claude</code></pre>
                     </div>
                 </div>
                 
@@ -588,8 +720,12 @@
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Terminal</span>
+                            <button class="copy-button" onclick="copyCode(this)">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
                         </div>
-                        <code>npx hackathon-skills list</code>
+                        <pre><code>npx hackathon-skills list</code></pre>
                     </div>
                 </div>
                 
@@ -599,8 +735,12 @@
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Terminal</span>
+                            <button class="copy-button" onclick="copyCode(this)">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
                         </div>
-                        <code># Install for specific scope
+                        <pre><code># Install for specific scope
 npx hackathon-skills add hackathon-grand-prize --agent claude --scope user
 
 # Dry run to preview changes
@@ -611,7 +751,7 @@ npx hackathon-skills add hackathon-grand-prize --agent kiro --force
 
 # Custom target directory
 npx hackathon-skills add hackathon-grand-prize --target ./my-skills
-
+npx hackathon-skills agents</code></pre>
 # List supported agents
 npx hackathon-skills agents</code>
                     </div>
@@ -628,7 +768,11 @@ npx hackathon-skills agents</code>
                     <h4>Claude Code</h4>
                     <p>Anthropic's AI coding assistant</p>
                     <div class="ide-path">.claude/skills/hackathon-grand-prize/</div>
-                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">
+                            <span class="copy-icon">📋</span>
+                            <span class="copy-text">Copy</span>
+                        </button>
+                        <pre><code>npx hackathon-skills add hackathon-grand-prize --agent claude</code></pre>
                         <code>npx hackathon-skills add hackathon-grand-prize --agent claude</code>
                     </div>
                 </div>
@@ -637,7 +781,11 @@ npx hackathon-skills agents</code>
                     <h4>Cursor</h4>
                     <p>AI-powered code editor</p>
                     <div class="ide-path">.cursor/skills/hackathon-grand-prize/</div>
-                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">
+                            <span class="copy-icon">📋</span>
+                            <span class="copy-text">Copy</span>
+                        </button>
+                        <pre><code>npx hackathon-skills add hackathon-grand-prize --agent cursor</code></pre>
                         <code>npx hackathon-skills add hackathon-grand-prize --agent cursor</code>
                     </div>
                 </div>
@@ -646,7 +794,11 @@ npx hackathon-skills agents</code>
                     <h4>GitHub Copilot</h4>
                     <p>VS Code / GitHub's AI pair programmer</p>
                     <div class="ide-path">.github/skills/hackathon-grand-prize/</div>
-                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">
+                            <span class="copy-icon">📋</span>
+                            <span class="copy-text">Copy</span>
+                        </button>
+                        <pre><code>npx hackathon-skills add hackathon-grand-prize --agent copilot</code></pre>
                         <code>npx hackathon-skills add hackathon-grand-prize --agent copilot</code>
                     </div>
                 </div>
@@ -655,7 +807,11 @@ npx hackathon-skills agents</code>
                     <h4>Kiro</h4>
                     <p>Next-gen AI coding assistant</p>
                     <div class="ide-path">.kiro/skills/hackathon-grand-prize/</div>
-                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">
+                            <span class="copy-icon">📋</span>
+                            <span class="copy-text">Copy</span>
+                        </button>
+                        <pre><code>npx hackathon-skills add hackathon-grand-prize --agent kiro</code></pre>
                         <code>npx hackathon-skills add hackathon-grand-prize --agent kiro</code>
                     </div>
                 </div>
@@ -664,7 +820,11 @@ npx hackathon-skills agents</code>
                     <h4>OpenAI Codex</h4>
                     <p>OpenAI's code generation model</p>
                     <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
-                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">
+                            <span class="copy-icon">📋</span>
+                            <span class="copy-text">Copy</span>
+                        </button>
+                        <pre><code>npx hackathon-skills add hackathon-grand-prize --agent codex</code></pre>
                         <code>npx hackathon-skills add hackathon-grand-prize --agent codex</code>
                     </div>
                 </div>
@@ -673,7 +833,11 @@ npx hackathon-skills agents</code>
                     <h4>Google Antigravity CLI</h4>
                     <p>Google's AI development tool</p>
                     <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
-                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">
+                            <span class="copy-icon">📋</span>
+                            <span class="copy-text">Copy</span>
+                        </button>
+                        <pre><code>npx hackathon-skills add hackathon-grand-prize --agent antigravity</code></pre>
                         <code>npx hackathon-skills add hackathon-grand-prize --agent antigravity</code>
                     </div>
                 </div>
@@ -800,15 +964,19 @@ npx hackathon-skills agents</code>
                 <div class="code-header">
                     <span class="code-lang">Python</span>
                 </div>
+                    <button class="copy-button" onclick="copyCode(this)">
+                        <span class="copy-icon">📋</span>
+                        <span class="copy-text">Copy</span>
+                    </button>
                 <code># Validate skill structure
-python hackathon-grand-prize/scripts/validate-skill.py
+                <pre><code># Validate skill structure
 
 # Score project readiness
 python hackathon-grand-prize/scripts/score-project.py --scores-json '&lt;scores&gt;'
 
 # Check project health
 python hackathon-grand-prize/scripts/project-health-check.py --checks-json '&lt;checks&gt;'
-
+python hackathon-grand-prize/scripts/validate-submission.py --file README.md --check-local-links</code></pre>
 # Validate submission
 python hackathon-grand-prize/scripts/validate-submission.py --file README.md --check-local-links</code>
             </div>
@@ -838,6 +1006,47 @@ python hackathon-grand-prize/scripts/validate-submission.py --file README.md --c
         </p>
     </footer>
     <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Copy Code Function
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block');
+            const code = codeBlock.querySelector('code');
+            const textToCopy = code.textContent;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const copyText = button.querySelector('.copy-text');
+                const originalText = copyText.textContent;
+                const copyIcon = button.querySelector('.copy-icon');
+                
+                button.classList.add('copied');
+                copyText.textContent = 'Copied!';
+                copyIcon.textContent = '✓';
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    copyText.textContent = originalText;
+                    copyIcon.textContent = '📋';
+                }, 2000);
+            });
+        }
+
+        // Scroll Reveal Animation
         const revealTargets = document.querySelectorAll('.feature-card, .ide-card, .skill-item, .example-item');
         revealTargets.forEach((element) => element.classList.add('reveal'));
         if ('IntersectionObserver' in window) {
