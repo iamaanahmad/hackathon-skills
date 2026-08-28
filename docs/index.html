@@ -59,34 +59,42 @@
         }
         
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --dark-bg: #0f172a;
-            --light-bg: #f8fafc;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --border-color: #e2e8f0;
-            --code-bg: #1e293b;
-            --success-color: #10b981;
+            --primary-color: #4f46e5;
+            --secondary-color: #0ea5e9;
+            --accent-color: #14b8a6;
+            --dark-bg: #0b1220;
+            --light-bg: #f4f7fb;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --border-color: #dbe4f0;
+            --code-bg: #111827;
+            --success-color: #059669;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             background: var(--light-bg);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 90% 10%, rgba(14, 165, 233, 0.1) 0%, transparent 28%);
         }
         
         /* Header & Navigation */
         header {
-            background: var(--dark-bg);
+            background: rgba(11, 18, 32, 0.88);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.35);
         }
         
         nav {
@@ -101,7 +109,8 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #c7d2fe, #67e8f9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -116,25 +125,47 @@
         .nav-links a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.25rem;
+            width: 100%;
+            height: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
         }
         
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: #bfdbfe;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            background:
+                radial-gradient(circle at 20% 10%, rgba(79, 70, 229, 0.25), transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.2), transparent 35%),
+                linear-gradient(160deg, var(--dark-bg) 0%, #111827 50%, #0f172a 100%);
             color: white;
             padding: 6rem 2rem;
             text-align: center;
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 4vw, 3.6rem);
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #e0e7ff, #a5f3fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -144,7 +175,7 @@
             font-size: 1.25rem;
             max-width: 800px;
             margin: 0 auto 2rem;
-            color: #94a3b8;
+            color: #cbd5e1;
         }
         
         .cta-buttons {
@@ -156,11 +187,12 @@
         
         .btn {
             padding: 1rem 2rem;
-            border-radius: 0.5rem;
+            border-radius: 999px;
             text-decoration: none;
             font-weight: 600;
             transition: transform 0.2s, box-shadow 0.2s;
             display: inline-block;
+            border: 1px solid transparent;
         }
         
         .btn:hover {
@@ -171,12 +203,13 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
+            box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
         }
         
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.06);
             color: white;
-            border: 2px solid var(--primary-color);
+            border-color: rgba(191, 219, 254, 0.45);
         }
         
         /* Container */
@@ -188,6 +221,7 @@
         
         section {
             margin-bottom: 4rem;
+            scroll-margin-top: 6rem;
         }
         
         h2 {
@@ -211,20 +245,30 @@
         }
         
         .feature-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.88);
             padding: 2rem;
             border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+            transition: transform 0.25s, box-shadow 0.25s;
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
         }
         
         .feature-icon {
-            font-size: 2.5rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.18), rgba(20, 184, 166, 0.2));
+            color: var(--primary-color);
+            font-size: 1.15rem;
+            font-weight: 700;
             margin-bottom: 1rem;
         }
         
@@ -241,11 +285,11 @@
         }
         
         .ide-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.92);
             padding: 1.5rem;
             border-radius: 0.75rem;
-            border-left: 4px solid var(--primary-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
         }
         
         .ide-card h4 {
@@ -272,7 +316,8 @@
             border-radius: 0.75rem;
             overflow-x: auto;
             margin: 1.5rem 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 12px 26px rgba(2, 6, 23, 0.25);
         }
         
         .code-block code {
@@ -304,11 +349,11 @@
         }
         
         .skill-item {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 1rem;
             border-radius: 0.5rem;
             border-left: 3px solid var(--secondary-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
         }
         
         .skill-item strong {
@@ -317,10 +362,11 @@
         
         /* Installation Steps */
         .install-steps {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 2rem;
             border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
         }
         
         .step {
@@ -342,17 +388,19 @@
         
         /* Usage Examples */
         .usage-examples {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, rgba(224, 231, 255, 0.5) 0%, rgba(217, 249, 250, 0.45) 100%);
             padding: 2rem;
             border-radius: 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.3);
         }
         
         .example-item {
-            background: white;
+            background: rgba(255, 255, 255, 0.94);
             padding: 1.5rem;
             margin-bottom: 1rem;
             border-radius: 0.5rem;
             border-left: 4px solid var(--accent-color);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
         }
         
         /* Footer */
@@ -415,12 +463,29 @@
         }
         
         .badge {
-            background: var(--primary-color);
+            background: rgba(79, 70, 229, 0.28);
+            border: 1px solid rgba(148, 163, 184, 0.4);
             color: white;
-            padding: 0.25rem 0.75rem;
+            padding: 0.35rem 0.85rem;
             border-radius: 1rem;
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 500;
+        }
+
+        .section-lead {
+            color: var(--text-light);
+            max-width: 70ch;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -428,7 +493,7 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">🏆 Hackathon Skills</div>
+            <div class="logo">Hackathon Skills</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#installation">Installation</a></li>
@@ -441,7 +506,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>🚀 Hackathon Skills</h1>
+        <h1>Hackathon Skills</h1>
         <p>Production-oriented, cross-platform Agent Skills that help AI coding agents strategically analyze, build, validate, demo, pitch, and submit hackathon projects with the strongest realistic chance of winning.</p>
         
         <div class="badges">
@@ -460,42 +525,42 @@
     <div class="container">
         <!-- Features Section -->
         <section id="features">
-            <h2>✨ Key Features</h2>
-            <p>The Hackathon Grand Prize Agent Skill optimizes for one memorable, working core workflow—not feature count. It combines hackathon research, idea scoring, differentiation, architecture, sponsor strategy, execution planning, engineering gates, security review, demo recovery, judge red-teaming, and submission readiness.</p>
+            <h2>Key Features</h2>
+            <p class="section-lead">The Hackathon Grand Prize Agent Skill optimizes for one memorable, working core workflow—not feature count. It combines hackathon research, idea scoring, differentiation, architecture, sponsor strategy, execution planning, engineering gates, security review, demo recovery, judge red-teaming, and submission readiness.</p>
             
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
+                    <div class="feature-icon">◉</div>
                     <h3>Strategic Analysis</h3>
                     <p>Analyze hackathon rules, identify winning criteria, and align with sponsor requirements for maximum competitive advantage.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">💡</div>
+                    <div class="feature-icon">✦</div>
                     <h3>Idea Scoring</h3>
                     <p>Score and rank project ideas based on differentiation, feasibility, sponsor fit, and realistic winning potential.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">🏗️</div>
+                    <div class="feature-icon">▦</div>
                     <h3>Architecture Planning</h3>
                     <p>Design right-sized architectures that prove differentiators within time constraints with built-in failure handling.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
+                    <div class="feature-icon">⛨</div>
                     <h3>Security Review</h3>
                     <p>Built-in security gates, secret scanning, input validation, and privacy checks before submission.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">🎬</div>
+                    <div class="feature-icon">▶</div>
                     <h3>Demo Engineering</h3>
                     <p>Create deterministic demos with fallback paths, fixtures, and recovery strategies for reliable presentations.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">🎤</div>
+                    <div class="feature-icon">✎</div>
                     <h3>Pitch Framework</h3>
                     <p>Structure compelling, evidence-backed pitches optimized for judges with timing and impact considerations.</p>
                 </div>
@@ -503,7 +568,7 @@
         </section>
         <!-- Installation Section -->
         <section id="installation">
-            <h2>📦 Installation</h2>
+            <h2>Installation</h2>
             
             <div class="install-steps">
                 <div class="step">
@@ -555,12 +620,12 @@ npx hackathon-skills agents</code>
         </section>
         <!-- Supported IDEs Section -->
         <section id="ides">
-            <h2>🛠️ Supported AI Coding Agents</h2>
+            <h2>Supported AI Coding Agents</h2>
             <p>Hackathon Skills works seamlessly with all major AI coding agents that support the Agent Skills specification:</p>
             
             <div class="ide-grid">
                 <div class="ide-card">
-                    <h4>🤖 Claude Code</h4>
+                    <h4>Claude Code</h4>
                     <p>Anthropic's AI coding assistant</p>
                     <div class="ide-path">.claude/skills/hackathon-grand-prize/</div>
                     <div class="code-block">
@@ -569,7 +634,7 @@ npx hackathon-skills agents</code>
                 </div>
                 
                 <div class="ide-card">
-                    <h4>💻 Cursor</h4>
+                    <h4>Cursor</h4>
                     <p>AI-powered code editor</p>
                     <div class="ide-path">.cursor/skills/hackathon-grand-prize/</div>
                     <div class="code-block">
@@ -578,7 +643,7 @@ npx hackathon-skills agents</code>
                 </div>
                 
                 <div class="ide-card">
-                    <h4>🐙 GitHub Copilot</h4>
+                    <h4>GitHub Copilot</h4>
                     <p>VS Code / GitHub's AI pair programmer</p>
                     <div class="ide-path">.github/skills/hackathon-grand-prize/</div>
                     <div class="code-block">
@@ -587,7 +652,7 @@ npx hackathon-skills agents</code>
                 </div>
                 
                 <div class="ide-card">
-                    <h4>🌊 Kiro</h4>
+                    <h4>Kiro</h4>
                     <p>Next-gen AI coding assistant</p>
                     <div class="ide-path">.kiro/skills/hackathon-grand-prize/</div>
                     <div class="code-block">
@@ -596,7 +661,7 @@ npx hackathon-skills agents</code>
                 </div>
                 
                 <div class="ide-card">
-                    <h4>🔮 OpenAI Codex</h4>
+                    <h4>OpenAI Codex</h4>
                     <p>OpenAI's code generation model</p>
                     <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
                     <div class="code-block">
@@ -605,7 +670,7 @@ npx hackathon-skills agents</code>
                 </div>
                 
                 <div class="ide-card">
-                    <h4>🚀 Google Antigravity CLI</h4>
+                    <h4>Google Antigravity CLI</h4>
                     <p>Google's AI development tool</p>
                     <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
                     <div class="code-block">
@@ -616,29 +681,29 @@ npx hackathon-skills agents</code>
         </section>
         <!-- Usage Section -->
         <section id="usage">
-            <h2>🎯 How to Use</h2>
+            <h2>How to Use</h2>
             
             <div class="usage-examples">
                 <h3>Natural Language Commands</h3>
                 <p>Simply ask your AI agent naturally:</p>
                 
                 <div class="example-item">
-                    <strong>💭 Analyze Hackathon</strong>
+                    <strong>Analyze Hackathon</strong>
                     <p>"Analyze this hackathon's official rules and recommend three differentiated ideas."</p>
                 </div>
                 
                 <div class="example-item">
-                    <strong>🔍 Review Project</strong>
+                    <strong>Review Project</strong>
                     <p>"Review our current project like a hostile judge and fix the highest-impact gaps."</p>
                 </div>
                 
                 <div class="example-item">
-                    <strong>🎬 Create Demo</strong>
+                    <strong>Create Demo</strong>
                     <p>"Create a deterministic three-minute demo with fallback and recovery paths."</p>
                 </div>
                 
                 <div class="example-item">
-                    <strong>📋 Prepare Submission</strong>
+                    <strong>Prepare Submission</strong>
                     <p>"Prepare and validate our final README, pitch, and submission checklist."</p>
                 </div>
             </div>
@@ -675,7 +740,7 @@ npx hackathon-skills agents</code>
         </section>
         <!-- Skill Capabilities -->
         <section id="capabilities">
-            <h2>🎓 Skill Capabilities</h2>
+            <h2>Skill Capabilities</h2>
             <p>The Hackathon Grand Prize Strategist provides comprehensive support through multiple execution phases:</p>
             
             <div class="features-grid">
@@ -712,7 +777,7 @@ npx hackathon-skills agents</code>
         </section>
         <!-- Design Principles -->
         <section id="principles">
-            <h2>🎯 Design Principles</h2>
+            <h2>Design Principles</h2>
             
             <div class="feature-card">
                 <ul style="list-style-position: inside; line-height: 2;">
@@ -728,7 +793,7 @@ npx hackathon-skills agents</code>
         </section>
         <!-- Validation -->
         <section id="validation">
-            <h2>✅ Validation & Helper Scripts</h2>
+            <h2>Validation & Helper Scripts</h2>
             <p>Optional Python 3.9+ helper scripts (zero dependencies, standard library only):</p>
             
             <div class="code-block">
@@ -772,5 +837,22 @@ python hackathon-grand-prize/scripts/validate-submission.py --file README.md --c
             Follows the open Agent Skills specification | Zero dependencies | Cross-platform
         </p>
     </footer>
+    <script>
+        const revealTargets = document.querySelectorAll('.feature-card, .ide-card, .skill-item, .example-item');
+        revealTargets.forEach((element) => element.classList.add('reveal'));
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            revealTargets.forEach((element) => observer.observe(element));
+        } else {
+            revealTargets.forEach((element) => element.classList.add('visible'));
+        }
+    </script>
 </body>
 </html>
