@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Hackathon Skills - AI Agent Skills for Winning Hackathons | Claude, Cursor, Copilot</title>
+    <meta name="description" content="Install portable hackathon Agent Skills for Claude Code, Cursor, GitHub Copilot, Kiro, and other AI coding agents. Strategic guidance for analyzing, building, and winning hackathon projects.">
+    <meta name="keywords" content="hackathon skills, AI agent skills, Claude Code, GitHub Copilot, Cursor, Kiro, hackathon tools, AI coding assistant, agent skills specification, npx, npm package">
+    <meta name="author" content="iamaanahmad">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://iamaanahmad.github.io/hackathon-skills/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://iamaanahmad.github.io/hackathon-skills/">
+    <meta property="og:title" content="Hackathon Skills - AI Agent Skills for Winning Hackathons">
+    <meta property="og:description" content="Install portable hackathon Agent Skills for Claude Code, Cursor, GitHub Copilot, Kiro, and other AI coding agents. Strategic guidance for building winning hackathon projects.">
+    <meta property="og:image" content="https://iamaanahmad.github.io/hackathon-skills/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://iamaanahmad.github.io/hackathon-skills/">
+    <meta property="twitter:title" content="Hackathon Skills - AI Agent Skills for Winning Hackathons">
+    <meta property="twitter:description" content="Install portable hackathon Agent Skills for Claude Code, Cursor, GitHub Copilot, Kiro, and other AI coding agents.">
+    <meta property="twitter:image" content="https://iamaanahmad.github.io/hackathon-skills/og-image.png">
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Hackathon Skills",
+      "description": "Install portable hackathon Agent Skills for Claude Code, Cursor, GitHub Copilot, Kiro, and compatible AI agents",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Cross-platform",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "iamaanahmad"
+      },
+      "codeRepository": "https://github.com/iamaanahmad/hackathon-skills",
+      "softwareVersion": "0.1.0",
+      "license": "https://opensource.org/licenses/MIT"
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --code-bg: #1e293b;
+            --success-color: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-bg);
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: var(--dark-bg);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #94a3b8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        section {
+            margin-bottom: 4rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+        }
+        
+        /* IDE Cards */
+        .ide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .ide-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .ide-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .ide-path {
+            background: var(--light-bg);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            word-break: break-all;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: var(--code-bg);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .code-block code {
+            font-family: 'Courier New', Consolas, Monaco, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .code-lang {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Skills Section */
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .skill-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--secondary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .skill-item strong {
+            color: var(--secondary-color);
+        }
+        
+        /* Installation Steps */
+        .install-steps {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        .step {
+            margin-bottom: 2rem;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2rem;
+            margin-right: 1rem;
+            font-weight: 700;
+        }
+        
+        /* Usage Examples */
+        .usage-examples {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+        
+        .example-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+        
+        /* Badges */
+        .badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+            justify-content: center;
+        }
+        
+        .badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">🏆 Hackathon Skills</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#ides">IDEs</a></li>
+                <li><a href="#usage">Usage</a></li>
+                <li><a href="https://github.com/iamaanahmad/hackathon-skills">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>🚀 Hackathon Skills</h1>
+        <p>Production-oriented, cross-platform Agent Skills that help AI coding agents strategically analyze, build, validate, demo, pitch, and submit hackathon projects with the strongest realistic chance of winning.</p>
+        
+        <div class="badges">
+            <span class="badge">MIT Licensed</span>
+            <span class="badge">Zero Dependencies</span>
+            <span class="badge">Cross-Platform</span>
+            <span class="badge">NPM Package</span>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="#installation" class="btn btn-primary">Get Started</a>
+            <a href="https://github.com/iamaanahmad/hackathon-skills" class="btn btn-secondary">View on GitHub</a>
+        </div>
+    </section>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Features Section -->
+        <section id="features">
+            <h2>✨ Key Features</h2>
+            <p>The Hackathon Grand Prize Agent Skill optimizes for one memorable, working core workflow—not feature count. It combines hackathon research, idea scoring, differentiation, architecture, sponsor strategy, execution planning, engineering gates, security review, demo recovery, judge red-teaming, and submission readiness.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Strategic Analysis</h3>
+                    <p>Analyze hackathon rules, identify winning criteria, and align with sponsor requirements for maximum competitive advantage.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Idea Scoring</h3>
+                    <p>Score and rank project ideas based on differentiation, feasibility, sponsor fit, and realistic winning potential.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h3>Architecture Planning</h3>
+                    <p>Design right-sized architectures that prove differentiators within time constraints with built-in failure handling.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Security Review</h3>
+                    <p>Built-in security gates, secret scanning, input validation, and privacy checks before submission.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Demo Engineering</h3>
+                    <p>Create deterministic demos with fallback paths, fixtures, and recovery strategies for reliable presentations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3>Pitch Framework</h3>
+                    <p>Structure compelling, evidence-backed pitches optimized for judges with timing and impact considerations.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Installation Section -->
+        <section id="installation">
+            <h2>📦 Installation</h2>
+            
+            <div class="install-steps">
+                <div class="step">
+                    <h3><span class="step-number">1</span>Quick Install with NPX</h3>
+                    <p>Install the skill directly into your agent's project directory without adding dependencies:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
+                        </div>
+                        <code>npx hackathon-skills add hackathon-grand-prize --agent claude</code>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h3><span class="step-number">2</span>List Available Skills</h3>
+                    <p>View the catalog of available hackathon skills:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
+                        </div>
+                        <code>npx hackathon-skills list</code>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h3><span class="step-number">3</span>Advanced Options</h3>
+                    <p>Customize installation with additional flags:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Terminal</span>
+                        </div>
+                        <code># Install for specific scope
+npx hackathon-skills add hackathon-grand-prize --agent claude --scope user
+
+# Dry run to preview changes
+npx hackathon-skills add hackathon-grand-prize --agent cursor --dry-run
+
+# Force reinstall with backup
+npx hackathon-skills add hackathon-grand-prize --agent kiro --force
+
+# Custom target directory
+npx hackathon-skills add hackathon-grand-prize --target ./my-skills
+
+# List supported agents
+npx hackathon-skills agents</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Supported IDEs Section -->
+        <section id="ides">
+            <h2>🛠️ Supported AI Coding Agents</h2>
+            <p>Hackathon Skills works seamlessly with all major AI coding agents that support the Agent Skills specification:</p>
+            
+            <div class="ide-grid">
+                <div class="ide-card">
+                    <h4>🤖 Claude Code</h4>
+                    <p>Anthropic's AI coding assistant</p>
+                    <div class="ide-path">.claude/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <code>npx hackathon-skills add hackathon-grand-prize --agent claude</code>
+                    </div>
+                </div>
+                
+                <div class="ide-card">
+                    <h4>💻 Cursor</h4>
+                    <p>AI-powered code editor</p>
+                    <div class="ide-path">.cursor/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <code>npx hackathon-skills add hackathon-grand-prize --agent cursor</code>
+                    </div>
+                </div>
+                
+                <div class="ide-card">
+                    <h4>🐙 GitHub Copilot</h4>
+                    <p>VS Code / GitHub's AI pair programmer</p>
+                    <div class="ide-path">.github/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <code>npx hackathon-skills add hackathon-grand-prize --agent copilot</code>
+                    </div>
+                </div>
+                
+                <div class="ide-card">
+                    <h4>🌊 Kiro</h4>
+                    <p>Next-gen AI coding assistant</p>
+                    <div class="ide-path">.kiro/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <code>npx hackathon-skills add hackathon-grand-prize --agent kiro</code>
+                    </div>
+                </div>
+                
+                <div class="ide-card">
+                    <h4>🔮 OpenAI Codex</h4>
+                    <p>OpenAI's code generation model</p>
+                    <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <code>npx hackathon-skills add hackathon-grand-prize --agent codex</code>
+                    </div>
+                </div>
+                
+                <div class="ide-card">
+                    <h4>🚀 Google Antigravity CLI</h4>
+                    <p>Google's AI development tool</p>
+                    <div class="ide-path">.agents/skills/hackathon-grand-prize/</div>
+                    <div class="code-block">
+                        <code>npx hackathon-skills add hackathon-grand-prize --agent antigravity</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Usage Section -->
+        <section id="usage">
+            <h2>🎯 How to Use</h2>
+            
+            <div class="usage-examples">
+                <h3>Natural Language Commands</h3>
+                <p>Simply ask your AI agent naturally:</p>
+                
+                <div class="example-item">
+                    <strong>💭 Analyze Hackathon</strong>
+                    <p>"Analyze this hackathon's official rules and recommend three differentiated ideas."</p>
+                </div>
+                
+                <div class="example-item">
+                    <strong>🔍 Review Project</strong>
+                    <p>"Review our current project like a hostile judge and fix the highest-impact gaps."</p>
+                </div>
+                
+                <div class="example-item">
+                    <strong>🎬 Create Demo</strong>
+                    <p>"Create a deterministic three-minute demo with fallback and recovery paths."</p>
+                </div>
+                
+                <div class="example-item">
+                    <strong>📋 Prepare Submission</strong>
+                    <p>"Prepare and validate our final README, pitch, and submission checklist."</p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Documented Modes</h3>
+            <p>Or invoke specific documented modes:</p>
+            
+            <div class="skills-list">
+                <div class="skill-item">
+                    <strong>/hackathon-analyze</strong> - Intelligence report and winning surface
+                </div>
+                <div class="skill-item">
+                    <strong>/hackathon-ideas</strong> - Ranked candidates and thesis
+                </div>
+                <div class="skill-item">
+                    <strong>/hackathon-build</strong> - Implemented vertical slice
+                </div>
+                <div class="skill-item">
+                    <strong>/hackathon-review</strong> - Findings and remediation
+                </div>
+                <div class="skill-item">
+                    <strong>/hackathon-demo</strong> - Rehearsable demo runbook
+                </div>
+                <div class="skill-item">
+                    <strong>/hackathon-pitch</strong> - Timed, evidence-backed script
+                </div>
+                <div class="skill-item">
+                    <strong>/hackathon-submit</strong> - Verified submission package
+                </div>
+                <div class="skill-item">
+                    <strong>/hackathon-score</strong> - Evidence-backed scoring
+                </div>
+            </div>
+        </section>
+        <!-- Skill Capabilities -->
+        <section id="capabilities">
+            <h2>🎓 Skill Capabilities</h2>
+            <p>The Hackathon Grand Prize Strategist provides comprehensive support through multiple execution phases:</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Phase 0: Research</h3>
+                    <p>Verify hackathon rules, eligibility, restrictions, judging criteria, and submission requirements with dated official citations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Phases 1-4: Ideation</h3>
+                    <p>Discover ideas, score candidates, differentiate from competition, and form compelling product thesis.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Phases 5-7: Planning</h3>
+                    <p>Design architecture, control MVP scope, and engineer deterministic demo paths first.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Phases 8-10: Quality</h3>
+                    <p>Raise UX quality, prove agent quality, and run comprehensive engineering gates.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Phases 11-12: Validation</h3>
+                    <p>Attack as a judge, identify weak answers, score readiness with evidence-backed rationale.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Phases 13-18: Delivery</h3>
+                    <p>Plan execution, build pitch and demo scripts, assemble submission package, final red team review.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Design Principles -->
+        <section id="principles">
+            <h2>🎯 Design Principles</h2>
+            
+            <div class="feature-card">
+                <ul style="list-style-position: inside; line-height: 2;">
+                    <li><strong>One canonical, self-contained skill package</strong> - Everything you need in one place</li>
+                    <li><strong>Trigger-rich metadata and explicit mode routing</strong> - Clear invocation patterns</li>
+                    <li><strong>Progressive disclosure through focused references</strong> - Load only what you need</li>
+                    <li><strong>Official-source research with dated citations</strong> - No invented facts</li>
+                    <li><strong>Evidence-based decision making</strong> - Facts, assumptions, and proof strength tracked separately</li>
+                    <li><strong>Human approval for critical actions</strong> - Safety gates for destructive operations</li>
+                    <li><strong>Deterministic validation and demo fallbacks</strong> - Reliability built in</li>
+                </ul>
+            </div>
+        </section>
+        <!-- Validation -->
+        <section id="validation">
+            <h2>✅ Validation & Helper Scripts</h2>
+            <p>Optional Python 3.9+ helper scripts (zero dependencies, standard library only):</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">Python</span>
+                </div>
+                <code># Validate skill structure
+python hackathon-grand-prize/scripts/validate-skill.py
+
+# Score project readiness
+python hackathon-grand-prize/scripts/score-project.py --scores-json '&lt;scores&gt;'
+
+# Check project health
+python hackathon-grand-prize/scripts/project-health-check.py --checks-json '&lt;checks&gt;'
+
+# Validate submission
+python hackathon-grand-prize/scripts/validate-submission.py --file README.md --check-local-links</code>
+            </div>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <h3>Ready to Win Your Next Hackathon?</h3>
+        <p>Get started with Hackathon Skills today</p>
+        
+        <div class="cta-buttons" style="margin-top: 1.5rem;">
+            <a href="#installation" class="btn btn-primary">Install Now</a>
+            <a href="https://github.com/iamaanahmad/hackathon-skills" class="btn btn-secondary">Star on GitHub</a>
+        </div>
+        
+        <div class="footer-links">
+            <a href="https://github.com/iamaanahmad/hackathon-skills">GitHub Repository</a>
+            <a href="https://github.com/iamaanahmad/hackathon-skills/blob/main/LICENSE">MIT License</a>
+            <a href="https://github.com/iamaanahmad/hackathon-skills/issues">Report Issues</a>
+        </div>
+        
+        <p style="margin-top: 2rem; color: #64748b;">
+            Built with ❤️ by <a href="https://github.com/iamaanahmad" style="color: var(--primary-color);">iamaanahmad</a>
+        </p>
+        <p style="color: #64748b; font-size: 0.875rem;">
+            Follows the open Agent Skills specification | Zero dependencies | Cross-platform
+        </p>
+    </footer>
+</body>
+</html>
